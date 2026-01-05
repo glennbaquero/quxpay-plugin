@@ -849,7 +849,7 @@ function quxpay_debug_wps_status() {
  * QUX® Pay API INTEGRATION - ORDER COMPLETION HANDLER
  * ============================================================================
  * Register custom REST API endpoint for QUX® Pay to communicate order completion
- * Endpoint: POST https://yoursite.com/wp-json/quxpay/v1/order-complete
+ * Endpoint: POST https://api.qux.tv/wp-json/quxpay/v1/order-complete
  */
 add_action('rest_api_init', function() {
     register_rest_route('quxpay/v1', '/order-complete', array(
@@ -985,7 +985,7 @@ function quxpay_handle_order_completion_from_qux($request) {
     $transaction_id = isset($params['transaction_id']) ? sanitize_text_field($params['transaction_id']) : 'qux_' . $order_id . '_' . time();
     $amount = isset($params['amount']) ? floatval($params['amount']) : null;
     
-    // Get the order (HPOS compatible)
+    // Get the order 
     $order = wc_get_order($order_id);
     
     if (!$order) {
@@ -1207,7 +1207,7 @@ function quxpay_add_order_note_from_qux($request) {
     
     $added_by_user = isset($params['added_by_user']) ? (bool) $params['added_by_user'] : false;
     
-    // Get the order (HPOS compatible)
+    // Get the order 
     $order = wc_get_order($order_id);
     
     if (!$order) {
